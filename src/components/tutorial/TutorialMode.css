@@ -1,0 +1,629 @@
+.tutorial-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg,
+    var(--yugen-deep-blue) 0%,
+    var(--yugen-midnight) 100%);
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ヘッダー */
+.tutorial-header {
+  padding: 20px 30px;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.tutorial-progress {
+  margin-bottom: 15px;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.step-indicator {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--yugen-ghost);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.step-indicator:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.step-indicator.active {
+  background: linear-gradient(135deg,
+    var(--yugen-gold),
+    var(--yuren-sakura));
+  border-color: transparent;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+.step-indicator.completed {
+  background: rgba(104, 211, 145, 0.2);
+  border-color: var(--yugen-spirit);
+  color: var(--yugen-spirit);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg,
+    var(--yuren-sakura),
+    var(--yugen-gold));
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.tutorial-score {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  text-align: center;
+}
+
+.score-label {
+  font-size: 0.9rem;
+  color: var(--yugen-ghost);
+  margin-bottom: 4px;
+}
+
+.score-value {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--yugen-gold);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* メインコンテンツ */
+.tutorial-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.tutorial-step {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+/* ステップヘッダー */
+.step-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.step-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 2rem;
+  color: var(--yugen-gold);
+  margin: 0;
+  background: linear-gradient(135deg,
+    var(--yugen-gold),
+    var(--yuren-sakura));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.step-number {
+  font-size: 1.1rem;
+  color: var(--yugen-ghost);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 6px 15px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 説明 */
+.step-description {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.step-description p {
+  font-size: 1.1rem;
+  color: var(--yugen-moonlight);
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+}
+
+.step-content {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.step-content li {
+  color: var(--yugen-moonlight);
+  line-height: 1.6;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.step-content li:last-child {
+  margin-bottom: 0;
+}
+
+/* 例 */
+.step-example {
+  background: rgba(26, 54, 93, 0.3);
+  border-radius: 15px;
+  padding: 25px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.example-title {
+  font-size: 1.3rem;
+  color: var(--yugen-gold);
+  margin: 0 0 20px 0;
+}
+
+.example-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+}
+
+.example-tile-wrapper {
+  perspective: 200px;
+}
+
+.example-tile-wrapper .tile {
+  --tile-width: 50px;
+  --tile-height: 70px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* チャレンジ */
+.step-challenge {
+  background: rgba(76, 29, 149, 0.2);
+  border-radius: 15px;
+  padding: 25px;
+  border: 2px solid rgba(244, 114, 182, 0.3);
+}
+
+.challenge-title {
+  font-size: 1.3rem;
+  color: var(--yuren-sakura);
+  margin: 0 0 15px 0;
+}
+
+.challenge-question {
+  font-size: 1.1rem;
+  color: var(--yugen-moonlight);
+  margin: 0 0 25px 0;
+  line-height: 1.6;
+}
+
+.challenge-content {
+  margin-top: 20px;
+}
+
+/* チャレンジオプション */
+.challenge-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.challenge-option {
+  position: relative;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.challenge-option:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: translateY(-2px);
+}
+
+.challenge-option.correct {
+  background: rgba(104, 211, 145, 0.2);
+  border-color: var(--yugen-spirit);
+  animation: pulse-correct 0.5s ease;
+}
+
+@keyframes pulse-correct {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.option-tiles {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.option-tile .tile {
+  --tile-width: 40px;
+  --tile-height: 56px;
+}
+
+.correct-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 30px;
+  height: 30px;
+  background: var(--yugen-spirit);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  box-shadow: 0 0 10px var(--yugen-spirit);
+}
+
+/* テキストオプション */
+.challenge-options-text {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.challenge-option-text {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: var(--yugen-moonlight);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  text-align: center;
+}
+
+.challenge-option-text:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: translateY(-2px);
+}
+
+.challenge-option-text.correct {
+  background: rgba(104, 211, 145, 0.2);
+  border-color: var(--yugen-spirit);
+  color: var(--yugen-spirit);
+  font-weight: 600;
+}
+
+.correct-icon {
+  margin-left: 10px;
+  font-size: 1.2rem;
+}
+
+/* 決定チャレンジ */
+.challenge-decide {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.scenario {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scenario p {
+  margin: 0 0 10px 0;
+  color: var(--yugen-moonlight);
+  font-size: 1rem;
+}
+
+.scenario p:last-child {
+  margin-bottom: 0;
+}
+
+.scenario strong {
+  color: var(--yugen-gold);
+}
+
+.decide-options {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.decide-option {
+  flex: 1;
+  max-width: 200px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: var(--yugen-moonlight);
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.decide-option:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ヒント */
+.step-hint {
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  overflow: hidden;
+}
+
+.hint-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.hint-icon {
+  font-size: 1.5rem;
+}
+
+.hint-title {
+  font-size: 1.1rem;
+  color: var(--yugen-gold);
+  font-weight: 600;
+}
+
+.hint-text {
+  font-size: 1rem;
+  color: var(--yugen-moonlight);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* アクションボタン */
+.step-actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.next-button,
+.hint-button,
+.skip-button {
+  padding: 15px 30px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.next-button {
+  background: linear-gradient(135deg,
+    var(--yugen-gold),
+    var(--yuren-sakura));
+  color: white;
+  border: none;
+}
+
+.next-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+}
+
+.hint-button {
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: var(--yugen-gold);
+}
+
+.hint-button:hover {
+  background: rgba(212, 175, 55, 0.2);
+}
+
+.skip-button {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--yugen-ghost);
+}
+
+.skip-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* フッター */
+.tutorial-footer {
+  padding: 20px 30px;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-info {
+  display: flex;
+  gap: 30px;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-label {
+  font-size: 0.9rem;
+  color: var(--yugen-ghost);
+}
+
+.info-value {
+  font-size: 1rem;
+  color: var(--yugen-moonlight);
+  font-weight: 500;
+}
+
+.exit-button {
+  padding: 12px 25px;
+  background: rgba(229, 62, 62, 0.1);
+  border: 1px solid rgba(229, 62, 62, 0.3);
+  border-radius: 8px;
+  color: var(--tile-man);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.exit-button:hover {
+  background: rgba(229, 62, 62, 0.2);
+  transform: translateY(-2px);
+}
+
+/* 成功アニメーション */
+.success-animation {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10001;
+  pointer-events: none;
+}
+
+.success-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.success-icon {
+  font-size: 4rem;
+  animation: bounce 0.5s ease infinite alternate;
+}
+
+@keyframes bounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-20px); }
+}
+
+.success-text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--yugen-gold);
+  text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px 30px;
+  border-radius: 15px;
+  border: 2px solid var(--yugen-gold);
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .tutorial-header {
+    padding: 15px;
+  }
+  
+  .tutorial-content {
+    padding: 15px;
+  }
+  
+  .step-header {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  
+  .step-title {
+    font-size: 1.5rem;
+  }
+  
+  .challenge-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .challenge-options-text {
+    grid-template-columns: 1fr;
+  }
+  
+  .decide-options {
+    flex-direction: column;
+  }
+  
+  .decide-option {
+    max-width: 100%;
+  }
+  
+  .footer-info {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .tutorial-footer {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .step-actions {
+    flex-direction: column;
+  }
+  
+  .example-tiles {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+}
