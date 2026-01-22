@@ -1,1 +1,332 @@
-////
+.action-buttons {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.main-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+/* 基本ボタンスタイル */
+.action-button {
+  flex: 1;
+  min-width: 120px;
+  padding: 18px 20px;
+  border: none;
+  border-radius: 15px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.action-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.action-button:hover::before {
+  left: 100%;
+}
+
+.action-button.enabled {
+  cursor: pointer;
+}
+
+.action-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+/* ボタンの種類 */
+.draw-button {
+  background: linear-gradient(135deg, var(--tile-sou), var(--tile-pin));
+  color: white;
+}
+
+.draw-button.enabled:hover {
+  box-shadow: 0 10px 20px rgba(49, 130, 206, 0.3);
+}
+
+.discard-button {
+  background: linear-gradient(135deg, var(--tile-man), #c53030);
+  color: white;
+}
+
+.discard-button.enabled:hover {
+  box-shadow: 0 10px 20px rgba(229, 62, 62, 0.3);
+}
+
+.riichi-button {
+  background: linear-gradient(135deg, var(--yuren-sakura), var(--yugen-mystic-purple));
+  color: white;
+}
+
+.riichi-button.enabled:hover {
+  box-shadow: 0 10px 20px rgba(244, 114, 182, 0.3);
+}
+
+.riichi-cost {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 0.8rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 6px;
+  border-radius: 10px;
+}
+
+/* ボタン内要素 */
+.button-icon {
+  font-size: 1.8rem;
+}
+
+.button-label {
+  font-size: 1rem;
+}
+
+.button-shortcut {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  font-family: monospace;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+
+/* サブメニュー */
+.submenu-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.menu-toggle {
+  min-width: 140px;
+  padding: 15px;
+  background: linear-gradient(135deg, rgba(26, 54, 93, 0.8), rgba(10, 25, 47, 0.8));
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  color: var(--yugen-moonlight);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle:hover {
+  border-color: var(--yugen-gold);
+  background: linear-gradient(135deg, rgba(26, 54, 93, 0.9), rgba(10, 25, 47, 0.9));
+}
+
+.menu-icon {
+  font-size: 1.4rem;
+}
+
+.menu-label {
+  flex: 1;
+  text-align: center;
+}
+
+.menu-arrow {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+/* サブメニューコンテンツ */
+.call-submenu,
+.win-submenu {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, rgba(10, 25, 47, 0.95), rgba(26, 54, 93, 0.95));
+  border-radius: 12px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  padding: 10px;
+  margin-bottom: 10px;
+  backdrop-filter: blur(10px);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.submenu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.submenu-button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--yugen-moonlight);
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.submenu-button.available {
+  cursor: pointer;
+  border: 1px solid rgba(104, 211, 145, 0.3);
+}
+
+.submenu-button.available:hover {
+  background: rgba(104, 211, 145, 0.1);
+  border-color: var(--yugen-spirit);
+  transform: translateY(-2px);
+}
+
+.submenu-button.unavailable {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+
+.submenu-icon {
+  font-size: 1.2rem;
+}
+
+.submenu-label {
+  font-size: 0.8rem;
+}
+
+.submenu-shortcut {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  font-family: monospace;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* 和了サブメニューの特別なスタイル */
+.ron-button.available {
+  border-color: rgba(229, 62, 62, 0.3);
+}
+
+.ron-button.available:hover {
+  background: rgba(229, 62, 62, 0.1);
+  border-color: var(--tile-man);
+}
+
+.tsumo-button.available {
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.tsumo-button.available:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: var(--yugen-gold);
+}
+
+/* ステータス表示 */
+.action-status {
+  min-height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.status-waiting,
+.status-selected,
+.status-ready {
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status-waiting {
+  color: var(--yugen-ghost);
+}
+
+.status-selected {
+  color: var(--yugen-spirit);
+  border-color: rgba(104, 211, 145, 0.3);
+  animation: pulse-status 2s infinite;
+}
+
+.status-ready {
+  color: var(--yugen-gold);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+@keyframes pulse-status {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .action-buttons {
+    max-width: 100%;
+  }
+  
+  .main-buttons {
+    flex-wrap: wrap;
+  }
+  
+  .action-button {
+    min-width: calc(50% - 10px);
+    padding: 15px;
+    font-size: 1rem;
+  }
+  
+  .menu-toggle {
+    min-width: calc(50% - 10px);
+    padding: 12px;
+  }
+  
+  .submenu-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .button-icon,
+  .menu-icon {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .action-button {
+    min-width: 100%;
+  }
+  
+  .menu-toggle {
+    min-width: 100%;
+  }
+  
+  .button-label,
+  .menu-label {
+    font-size: 0.9rem;
+  }
+}
