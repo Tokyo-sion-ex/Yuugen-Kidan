@@ -1,0 +1,345 @@
+.league-ladder {
+  background: rgba(20, 20, 40, 0.9);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(100, 100, 255, 0.2);
+}
+
+.ladder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.current-rank-display {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(100, 100, 255, 0.1);
+  padding: 12px 20px;
+  border-radius: 8px;
+}
+
+.rank-icon {
+  font-size: 24px;
+}
+
+.rank-name {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.rank-score {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.ladder-visualization {
+  position: relative;
+  margin: 40px 0;
+}
+
+.progress-bar {
+  height: 8px;
+  background: rgba(50, 50, 80, 0.5);
+  border-radius: 4px;
+  margin-bottom: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 1s ease-in-out;
+}
+
+.ranks-grid {
+  display: grid;
+  gap: 16px;
+}
+
+.rank-tier {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(30, 30, 60, 0.5);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  position: relative;
+  transition: all 0.3s;
+}
+
+.rank-tier.unlocked {
+  border-color: rgba(100, 100, 255, 0.3);
+}
+
+.rank-tier.current {
+  background: rgba(100, 100, 255, 0.1);
+  transform: translateX(10px);
+}
+
+.rank-tier.locked {
+  opacity: 0.5;
+}
+
+.tier-icon {
+  font-size: 32px;
+}
+
+.tier-info h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+}
+
+.tier-info p {
+  margin: 0;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.tier-rewards {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.reward-badge {
+  background: rgba(100, 100, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.current-indicator {
+  position: absolute;
+  right: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}
+
+.glow-effect {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0.3; }
+}
+
+.rank-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.stat-card {
+  background: rgba(30, 30, 60, 0.5);
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.stat-card h4 {
+  margin: 0 0 8px 0;
+  color: #aaa;
+  font-size: 14px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Leaderboard Styles */
+.leaderboard {
+  background: rgba(20, 20, 40, 0.9);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(100, 100, 255, 0.2);
+}
+
+.leaderboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  background: rgba(50, 50, 80, 0.5);
+  border: none;
+  border-radius: 6px;
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filter-btn.active {
+  background: rgba(100, 100, 255, 0.3);
+  color: #fff;
+}
+
+.leaderboard-table {
+  background: rgba(30, 30, 60, 0.3);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table-header {
+  display: grid;
+  grid-template-columns: 80px 2fr 1fr 1fr 1fr 1fr;
+  padding: 16px;
+  background: rgba(100, 100, 255, 0.1);
+  font-weight: bold;
+  color: #aaa;
+}
+
+.table-body {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 80px 2fr 1fr 1fr 1fr 1fr;
+  padding: 16px;
+  align-items: center;
+  border-bottom: 1px solid rgba(100, 100, 255, 0.1);
+  transition: background 0.2s;
+}
+
+.table-row:hover {
+  background: rgba(100, 100, 255, 0.05);
+}
+
+.table-row.current-player {
+  background: rgba(100, 100, 255, 0.1);
+}
+
+.col-rank .rank-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(100, 100, 255, 0.2);
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.player-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.player-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-name {
+  font-weight: bold;
+}
+
+.you-badge {
+  background: rgba(100, 100, 255, 0.3);
+  color: #fff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  align-self: flex-start;
+}
+
+.rank-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.score-value {
+  font-weight: bold;
+  color: #fff;
+}
+
+.winrate-bar {
+  width: 100px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.winrate-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+  transition: width 0.3s;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.pagination button {
+  padding: 8px 16px;
+  background: rgba(50, 50, 80, 0.5);
+  border: none;
+  border-radius: 6px;
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: rgba(100, 100, 255, 0.3);
+  color: #fff;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 4px;
+}
+
+.page-numbers button.active {
+  background: rgba(100, 100, 255, 0.3);
+  color: #fff;
+}
