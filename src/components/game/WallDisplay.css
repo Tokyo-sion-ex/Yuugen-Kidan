@@ -1,0 +1,337 @@
+.wall-display {
+  width: 280px;
+  background: rgba(10, 25, 47, 0.8);
+  border-radius: 15px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.wall-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.wall-title {
+  font-size: 1.3rem;
+  color: var(--yugen-gold);
+  margin: 0;
+  font-family: 'Shippori Mincho', serif;
+}
+
+.wall-status {
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  border: 1px solid currentColor;
+}
+
+/* 牌山ビジュアル */
+.wall-visual {
+  position: relative;
+  height: 150px;
+  margin-bottom: 25px;
+}
+
+.wall-stack {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  gap: 2px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.wall-tile-placeholder {
+  width: 20px;
+  height: 28px;
+  perspective: 100px;
+}
+
+.wall-tile-back {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    #4a5568 0%,
+    #2d3748 100%
+  );
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: rotateX(60deg);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.wall-count {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.count-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  border: 3px solid var(--yugen-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 0 20px rgba(212, 175, 55, 0.3),
+    inset 0 0 10px rgba(212, 175, 55, 0.1);
+}
+
+.count-number {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--yugen-gold);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.count-label {
+  font-size: 0.9rem;
+  color: var(--yugen-ghost);
+  background: rgba(0, 0, 0, 0.5);
+  padding: 4px 12px;
+  border-radius: 10px;
+}
+
+/* ドラ表示セクション */
+.dora-section {
+  margin-top: 25px;
+}
+
+.dora-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.dora-title {
+  font-size: 1.1rem;
+  color: var(--yugen-moonlight);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dora-toggle {
+  background: rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: var(--yugen-gold);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.dora-toggle:hover {
+  background: rgba(212, 175, 55, 0.3);
+  transform: scale(1.1);
+}
+
+.dora-indicators {
+  overflow: hidden;
+}
+
+.dora-tiles {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.dora-tile-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  perspective: 200px;
+}
+
+.dora-tile-wrapper .tile {
+  --tile-width: 50px;
+  --tile-height: 70px;
+  transform-style: preserve-3d;
+}
+
+.dora-label {
+  font-size: 0.8rem;
+  color: var(--yuren-sakura);
+  background: rgba(244, 114, 182, 0.1);
+  padding: 2px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(244, 114, 182, 0.2);
+}
+
+.ura-dora-placeholder {
+  opacity: 0.6;
+}
+
+.ura-dora-tile {
+  position: relative;
+  width: 50px;
+  height: 70px;
+  perspective: 200px;
+}
+
+.tile-back {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    #2d3748 0%,
+    #1a202c 100%
+  );
+  border-radius: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  transform: rotateY(10deg);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.ura-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.7rem;
+  color: var(--yugen-ghost);
+  text-align: center;
+  width: 100%;
+  padding: 0 5px;
+}
+
+.no-dora {
+  text-align: center;
+  color: var(--yugen-ghost);
+  font-style: italic;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.dora-info {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 0.8rem;
+  color: var(--yugen-ghost);
+}
+
+.info-value {
+  font-size: 0.9rem;
+  color: var(--yugen-gold);
+  font-weight: 500;
+}
+
+/* 山の進捗バー */
+.wall-progress {
+  margin-top: 25px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s ease, background 0.5s ease;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  color: var(--yugen-ghost);
+}
+
+/* レスポンシブ */
+@media (max-width: 1024px) {
+  .wall-display {
+    width: 240px;
+    padding: 15px;
+  }
+  
+  .count-circle {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .count-number {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .wall-display {
+    width: 200px;
+    padding: 12px;
+  }
+  
+  .wall-title {
+    font-size: 1.1rem;
+  }
+  
+  .dora-tiles {
+    gap: 10px;
+  }
+  
+  .dora-tile-wrapper .tile {
+    --tile-width: 40px;
+    --tile-height: 56px;
+  }
+}
