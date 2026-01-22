@@ -1,0 +1,488 @@
+.game-controls {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 15px;
+  z-index: 1000;
+}
+
+/* メニュートグルボタン */
+.menu-toggle-button {
+  background: linear-gradient(135deg, 
+    rgba(76, 29, 149, 0.8), 
+    rgba(26, 54, 93, 0.8));
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  border-radius: 12px;
+  padding: 12px 20px;
+  color: var(--yugen-moonlight);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.menu-toggle-button:hover {
+  border-color: var(--yugen-gold);
+  background: linear-gradient(135deg, 
+    rgba(76, 29, 149, 0.9), 
+    rgba(26, 54, 93, 0.9));
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 24px;
+}
+
+.menu-line {
+  height: 3px;
+  background: var(--yugen-gold);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.menu-toggle-button:hover .menu-line {
+  background: var(--yuren-sakura);
+}
+
+.menu-label {
+  font-size: 0.9rem;
+}
+
+/* クイックアクションボタン */
+.quick-actions {
+  display: flex;
+  gap: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.quick-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  background: linear-gradient(135deg, 
+    rgba(26, 54, 93, 0.6), 
+    rgba(10, 25, 47, 0.6));
+  color: var(--yugen-moonlight);
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.quick-button:hover {
+  border-color: var(--yugen-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+}
+
+.quick-button.paused {
+  border-color: var(--yuren-sakura);
+  background: linear-gradient(135deg, 
+    rgba(244, 114, 182, 0.2), 
+    rgba(26, 54, 93, 0.6));
+}
+
+/* ゲーム情報表示 */
+.game-info-display {
+  display: flex;
+  gap: 10px;
+}
+
+.info-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  backdrop-filter: blur(5px);
+}
+
+.info-icon {
+  font-size: 1.1rem;
+}
+
+.info-text {
+  font-size: 0.9rem;
+  color: var(--yugen-moonlight);
+  font-weight: 500;
+}
+
+.mode-badge {
+  background: linear-gradient(135deg, 
+    rgba(76, 29, 149, 0.3), 
+    rgba(26, 54, 93, 0.3));
+}
+
+.time-badge {
+  background: linear-gradient(135deg, 
+    rgba(104, 211, 145, 0.2), 
+    rgba(26, 54, 93, 0.3));
+}
+
+/* メニューモーダル */
+.menu-overlay,
+.settings-overlay,
+.pause-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.menu-modal,
+.settings-modal,
+.pause-modal {
+  background: linear-gradient(135deg, 
+    var(--yugen-deep-blue) 0%,
+    var(--yugen-midnight) 100%);
+  border-radius: 20px;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  max-width: 90%;
+  max-height: 90%;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.menu-modal {
+  width: 400px;
+}
+
+.settings-modal {
+  width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.pause-modal {
+  width: 350px;
+  text-align: center;
+  padding: 40px;
+}
+
+/* メニューヘッダー */
+.menu-header,
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-title,
+.settings-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 1.8rem;
+  color: var(--yugen-gold);
+  margin: 0;
+}
+
+.menu-close,
+.settings-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--yugen-gold);
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.menu-close:hover,
+.settings-close:hover {
+  background: rgba(212, 175, 55, 0.1);
+  transform: rotate(90deg);
+}
+
+/* メニューコンテンツ */
+.menu-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  color: var(--yugen-moonlight);
+  margin: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-item {
+  padding: 15px 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: var(--yugen-moonlight);
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: translateX(5px);
+}
+
+.item-icon {
+  font-size: 1.3rem;
+  width: 24px;
+  text-align: center;
+}
+
+.item-label {
+  flex: 1;
+}
+
+/* 特別なメニューアイテム */
+.save-button:hover {
+  border-color: rgba(104, 211, 145, 0.3);
+  background: rgba(104, 211, 145, 0.1);
+}
+
+.load-button:hover {
+  border-color: rgba(49, 130, 206, 0.3);
+  background: rgba(49, 130, 206, 0.1);
+}
+
+.screenshot-button:hover {
+  border-color: rgba(244, 114, 182, 0.3);
+  background: rgba(244, 114, 182, 0.1);
+}
+
+.exit-button {
+  background: rgba(229, 62, 62, 0.1);
+  border-color: rgba(229, 62, 62, 0.3);
+  color: var(--tile-man);
+}
+
+.exit-button:hover {
+  background: rgba(229, 62, 62, 0.2);
+  border-color: var(--tile-man);
+}
+
+/* ゲーム統計 */
+.game-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--yugen-ghost);
+}
+
+.stat-value {
+  font-size: 1rem;
+  color: var(--yugen-gold);
+  font-weight: 500;
+}
+
+/* メニューフッター */
+.menu-footer {
+  padding: 20px 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.shortcut-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shortcut-key {
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--yugen-gold);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.shortcut-label {
+  font-size: 0.8rem;
+  color: var(--yugen-ghost);
+}
+
+/* 設定モーダル */
+.settings-content {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.settings-section-title {
+  font-size: 1.3rem;
+  color: var(--yugen-moonlight);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 設定項目 */
+.setting-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.setting-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label-text {
+  font-size: 1rem;
+  color: var(--yugen-moonlight);
+  font-weight: 500;
+}
+
+.label-value {
+  font-size: 0.9rem;
+  color: var(--yugen-gold);
+  font-weight: 600;
+}
+
+.label-description {
+  font-size: 0.8rem;
+  color: var(--yugen-ghost);
+  margin-top: 2px;
+}
+
+/* スライダー */
+.slider-container {
+  position: relative;
+  padding-top: 5px;
+}
+
+.volume-slider {
+  width: 100%;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--yugen-gold);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--yugen-gold);
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.slider-ticks {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  font-size: 0.7rem;
+  color: var(--yugen-ghost);
+}
+
+/* トグルスイッチ */
+.toggle-item {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-label {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline
