@@ -485,4 +485,395 @@
 
 .toggle-switch {
   position: relative;
-  display: inline
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 34px;
+  transition: .4s;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 3px;
+  background: var(--yugen-ghost);
+  border-radius: 50%;
+  transition: .4s;
+}
+
+input:checked + .toggle-slider {
+  background: rgba(212, 175, 55, 0.3);
+  border-color: var(--yugen-gold);
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(28px);
+  background: var(--yugen-gold);
+}
+
+/* セレクトボックス */
+.time-select {
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 8px;
+  color: var(--yugen-moonlight);
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.time-select:focus {
+  outline: none;
+  border-color: var(--yugen-gold);
+}
+
+/* スケールボタン */
+.scale-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.scale-button {
+  flex: 1;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--yugen-moonlight);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.scale-button:hover {
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.scale-button.active {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: var(--yugen-gold);
+  color: var(--yugen-gold);
+}
+
+/* 表示オプション */
+.display-options {
+  display: flex;
+  gap: 15px;
+}
+
+.option-radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.option-radio input[type="radio"] {
+  display: none;
+}
+
+.radio-label {
+  padding: 8px 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: var(--yugen-ghost);
+  transition: all 0.3s ease;
+}
+
+.option-radio input[type="radio"]:checked + .radio-label {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: var(--yugen-gold);
+  color: var(--yugen-gold);
+}
+
+/* テーマセレクター */
+.theme-selector {
+  display: flex;
+  gap: 15px;
+}
+
+.theme-button {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.theme-button.active {
+  border-color: var(--yugen-gold);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.theme-preview {
+  width: 60px;
+  height: 40px;
+  border-radius: 6px;
+}
+
+.yugen-theme {
+  background: linear-gradient(135deg, var(--yugen-deep-blue), var(--yugen-mystic-purple));
+  border: 2px solid var(--yugen-gold);
+}
+
+.light-theme {
+  background: linear-gradient(135deg, #f7fafc, #e2e8f0);
+  border: 2px solid #cbd5e0;
+}
+
+.dark-theme {
+  background: linear-gradient(135deg, #1a202c, #2d3748);
+  border: 2px solid #4a5568;
+}
+
+.theme-name {
+  font-size: 0.9rem;
+  color: var(--yugen-moonlight);
+}
+
+.theme-button.active .theme-name {
+  color: var(--yugen-gold);
+  font-weight: 500;
+}
+
+/* キーバインディング */
+.keybindings {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.keybinding-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.keybinding-action {
+  font-size: 0.9rem;
+  color: var(--yugen-moonlight);
+}
+
+.keybinding-key {
+  font-family: monospace;
+  font-size: 0.9rem;
+  padding: 4px 10px;
+  background: rgba(212, 175, 55, 0.2);
+  color: var(--yugen-gold);
+  border-radius: 6px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+/* リセットボタン */
+.reset-controls {
+  margin-top: 15px;
+}
+
+.reset-button {
+  width: 100%;
+  padding: 12px;
+  background: rgba(229, 62, 62, 0.1);
+  border: 1px solid rgba(229, 62, 62, 0.3);
+  border-radius: 8px;
+  color: var(--tile-man);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.reset-button:hover {
+  background: rgba(229, 62, 62, 0.2);
+}
+
+/* サウンドテスト */
+.sound-test {
+  margin-top: 15px;
+}
+
+.test-button {
+  width: 100%;
+  padding: 12px;
+  background: rgba(104, 211, 145, 0.1);
+  border: 1px solid rgba(104, 211, 145, 0.3);
+  border-radius: 8px;
+  color: var(--yugen-spirit);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.test-button:hover {
+  background: rgba(104, 211, 145, 0.2);
+}
+
+/* 設定フッター */
+.settings-footer {
+  padding: 20px 25px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 15px;
+}
+
+.settings-apply,
+.settings-cancel {
+  flex: 1;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.settings-apply {
+  background: linear-gradient(135deg, var(--yugen-gold), var(--yuren-sakura));
+  color: white;
+  border: none;
+}
+
+.settings-apply:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+}
+
+.settings-cancel {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--yugen-moonlight);
+}
+
+.settings-cancel:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+/* 一時停止モーダル */
+.pause-icon {
+  font-size: 4rem;
+  margin-bottom: 20px;
+}
+
+.pause-title {
+  font-size: 2rem;
+  color: var(--yugen-gold);
+  margin: 0 0 10px 0;
+}
+
+.pause-message {
+  color: var(--yugen-ghost);
+  margin-bottom: 30px;
+}
+
+.pause-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.pause-resume,
+.pause-menu {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pause-resume {
+  background: linear-gradient(135deg, var(--yugen-spirit), var(--tile-pin));
+  color: white;
+  border: none;
+}
+
+.pause-resume:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(104, 211, 145, 0.3);
+}
+
+.pause-menu {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: var(--yugen-gold);
+}
+
+.pause-menu:hover {
+  background: rgba(212, 175, 55, 0.1);
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .game-controls {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .menu-modal,
+  .settings-modal {
+    width: 95%;
+    margin: 10px;
+  }
+  
+  .keybindings {
+    grid-template-columns: 1fr;
+  }
+  
+  .display-options {
+    flex-direction: column;
+  }
+  
+  .theme-selector {
+    flex-direction: column;
+  }
+  
+  .pause-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-actions {
+    flex-wrap: wrap;
+  }
+  
+  .game-info-display {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
