@@ -33,3 +33,23 @@
 * 襖や巻物をモチーフにしたインターフェース
 * ほのかな和紙テクスチャ背景
 * 筆文字フォントを使用
+
+## 🎮 特徴
+- 一局戦、東風戦、東南戦、一荘戦の4モード
+- 幽玄をテーマにした美しいビジュアル
+- 季節に応じた演出の変化
+- レスポンシブデザイン
+
+## 🚀 開発開始
+
+### 環境設定
+```bash
+# 方法1: シェルスクリプト使用
+chmod +x init-project.sh
+./init-project.sh
+
+# 方法2: 手動で設定
+npm create vite@latest yugen-kitan -- --template react-ts
+cd yugen-kitan
+npm install
+npm run dev
