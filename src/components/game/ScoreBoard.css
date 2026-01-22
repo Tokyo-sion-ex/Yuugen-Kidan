@@ -1,0 +1,589 @@
+.score-board {
+  width: 800px;
+  max-width: 90vw;
+  max-height: 80vh;
+  background: linear-gradient(
+    135deg,
+    var(--yugen-deep-blue) 0%,
+    var(--yugen-midnight) 100%
+  );
+  border-radius: 20px;
+  border: 2px solid rgba(212, 175, 55, 0.3);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  overflow-y: auto;
+}
+
+/* ヘッダー */
+.score-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.score-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 2rem;
+  color: var(--yugen-gold);
+  margin: 0;
+  background: linear-gradient(135deg, var(--yugen-gold), var(--yuren-sakura));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.score-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.history-toggle {
+  padding: 8px 16px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: var(--yugen-gold);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.history-toggle:hover {
+  background: rgba(212, 175, 55, 0.2);
+  transform: translateY(-2px);
+}
+
+.close-button {
+  width: 36px;
+  height: 36px;
+  background: rgba(229, 62, 62, 0.1);
+  border: 1px solid rgba(229, 62, 62, 0.3);
+  color: var(--tile-man);
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  background: rgba(229, 62, 62, 0.2);
+  transform: rotate(90deg);
+}
+
+/* ランキングカード */
+.rankings {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ranking-card {
+  background: linear-gradient(
+    135deg,
+    rgba(26, 54, 93, 0.6) 0%,
+    rgba(10, 25, 47, 0.6) 100%
+  );
+  border-radius: 15px;
+  border: 2px solid;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.ranking-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ranking-card:hover::before {
+  opacity: 1;
+}
+
+.ranking-card.rank-1 {
+  border-color: var(--yuren-gold);
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.1) 0%,
+    rgba(26, 54, 93, 0.6) 100%
+  );
+}
+
+.ranking-card.rank-2 {
+  border-color: var(--yuren-sakura);
+  background: linear-gradient(
+    135deg,
+    rgba(244, 114, 182, 0.1) 0%,
+    rgba(26, 54, 93, 0.6) 100%
+  );
+}
+
+.ranking-card.rank-3 {
+  border-color: var(--yugen-spirit);
+  background: linear-gradient(
+    135deg,
+    rgba(104, 211, 145, 0.1) 0%,
+    rgba(26, 54, 93, 0.6) 100%
+  );
+}
+
+.ranking-card.rank-4 {
+  border-color: var(--yugen-ghost);
+  background: linear-gradient(
+    135deg,
+    rgba(160, 174, 192, 0.1) 0%,
+    rgba(26, 54, 93, 0.6) 100%
+  );
+}
+
+.rank-badge {
+  min-width: 60px;
+  height: 60px;
+  background: currentColor;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.rank-1 .rank-badge {
+  background: linear-gradient(135deg, var(--yuren-gold), #b8941f);
+}
+
+.rank-2 .rank-badge {
+  background: linear-gradient(135deg, var(--yuren-sakura), #d1659c);
+}
+
+.rank-3 .rank-badge {
+  background: linear-gradient(135deg, var(--yugen-spirit), #4bb87d);
+}
+
+.rank-4 .rank-badge {
+  background: linear-gradient(135deg, var(--yugen-ghost), #8a95a8);
+}
+
+.rank-number {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+  line-height: 1;
+}
+
+.rank-suffix {
+  font-size: 0.7rem;
+  color: white;
+  opacity: 0.9;
+}
+
+.player-info {
+  flex: 1;
+}
+
+.player-name-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.player-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--yugen-moonlight);
+}
+
+.player-wind {
+  font-size: 0.9rem;
+  color: var(--yugen-gold);
+  background: rgba(212, 175, 55, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.dealer-indicator {
+  font-size: 0.8rem;
+  color: var(--yuren-sakura);
+  background: rgba(244, 114, 182, 0.1);
+  padding: 2px 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(244, 114, 182, 0.3);
+}
+
+.player-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-points {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.points-label {
+  font-size: 0.8rem;
+  color: var(--yugen-ghost);
+}
+
+.points-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--yugen-gold);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+.point-details {
+  display: flex;
+  gap: 20px;
+}
+
+.point-change,
+.uma-bonus {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.change-label,
+.uma-label {
+  font-size: 0.7rem;
+  color: var(--yugen-ghost);
+}
+
+.change-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.change-value.positive {
+  color: var(--yugen-spirit);
+}
+
+.change-value.negative {
+  color: var(--tile-man);
+}
+
+.uma-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--yuren-sakura);
+}
+
+/* リーチ棒表示 */
+.riichi-stick-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.riichi-stick {
+  width: 30px;
+  height: 4px;
+  background: var(--yuren-sakura);
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--yuren-sakura);
+  animation: riuchi-pulse 2s infinite;
+}
+
+.riichi-text {
+  font-size: 0.7rem;
+  color: var(--yuren-sakura);
+}
+
+/* 合計点数 */
+.total-points {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.total-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.total-header h3 {
+  font-size: 1.2rem;
+  color: var(--yugen-moonlight);
+  margin: 0;
+}
+
+.total-sum {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--yugen-gold);
+}
+
+.total-note {
+  font-size: 0.9rem;
+  color: var(--yugen-ghost);
+  text-align: center;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* 順位予想 */
+.rank-prediction {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rank-prediction h3 {
+  font-size: 1.2rem;
+  color: var(--yugen-moonlight);
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.prediction-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.prediction-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.prediction-name {
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prediction-rank {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--yugen-gold);
+  min-width: 30px;
+}
+
+.prediction-player {
+  font-size: 0.9rem;
+  color: var(--yugen-moonlight);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.prediction-bar {
+  flex: 1;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.prediction-fill {
+  height: 100%;
+  border-radius: 15px;
+  position: relative;
+  transition: width 1s ease;
+}
+
+.prediction-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  animation: shimmer 3s infinite;
+}
+
+.prediction-percent {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* 対戦履歴 */
+.game-history {
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-history h3 {
+  font-size: 1.2rem;
+  color: var(--yugen-moonlight);
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-item {
+  background: rgba(26, 54, 93, 0.3);
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.history-round {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.round-number {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--yugen-gold);
+}
+
+.round-result {
+  font-size: 0.9rem;
+  color: var(--yugen-spirit);
+  background: rgba(104, 211, 145, 0.1);
+  padding: 4px 12px;
+  border-radius: 15px;
+}
+
+.history-points {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.point-change {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.point-change .player-name {
+  font-size: 0.9rem;
+  color: var(--yugen-ghost);
+}
+
+/* フッター */
+.score-footer {
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-info {
+  display: flex;
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 0.8rem;
+  color: var(--yugen-ghost);
+}
+
+.info-value {
+  font-size: 0.9rem;
+  color: var(--yugen-moonlight);
+}
+
+.time-stamp {
+  font-size: 0.8rem;
+  color: var(--yugen-ghost);
+  opacity: 0.7;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .score-board {
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .score-title {
+    font-size: 1.5rem;
+  }
+  
+  .ranking-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .player-stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .point-details {
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .history-points {
+    grid-template-columns: 1fr;
+  }
+  
+  .score-footer {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+  
+  .game-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
