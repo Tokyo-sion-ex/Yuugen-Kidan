@@ -1,0 +1,170 @@
+.tile-canvas-container {
+  position: relative;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.tile-canvas-container canvas {
+  border-radius: 8px;
+  background: transparent;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* ローディング状態 */
+.tile-loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(212, 175, 55, 0.3);
+  border-top: 3px solid var(--yugen-gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* デバッグ情報 */
+.tile-debug-info {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--yugen-spirit);
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.debug-text {
+  font-family: monospace;
+}
+
+/* タッチフィードバック */
+.tile-canvas-container.touch-active {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
+
+/* 高品質レンダリング設定 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .tile-canvas-container canvas {
+    image-rendering: auto;
+  }
+}
+
+/* パフォーマンス設定 */
+.performance-low .tile-canvas-container canvas {
+  image-rendering: pixelated;
+}
+
+.performance-high .tile-canvas-container canvas {
+  image-rendering: auto;
+  filter: none;
+}
+
+/* アクセシビリティ */
+.tile-canvas-container:focus-visible {
+  outline: 2px solid var(--yuren-sakura);
+  outline-offset: 2px;
+}
+
+/* アニメーションクラス */
+.tile-animation-draw {
+  animation: tile-draw 0.3s ease-out;
+}
+
+.tile-animation-discard {
+  animation: tile-discard 0.2s ease-in;
+}
+
+.tile-animation-riichi {
+  animation: tile-riichi 1s ease-in-out infinite;
+}
+
+.tile-animation-win {
+  animation: tile-win 1s ease-out;
+}
+
+@keyframes tile-draw {
+  0% {
+    transform: translateY(20px) scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tile-discard {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(180deg);
+  }
+}
+
+@keyframes tile-riichi {
+  0%, 100% {
+    box-shadow: 0 0 10px #FFD700;
+  }
+  50% {
+    box-shadow: 0 0 25px #FFD700;
+  }
+}
+
+@keyframes tile-win {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.5);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+/* レスポンシブ設定 */
+@media (max-width: 768px) {
+  .tile-canvas-container {
+    transform-origin: center;
+  }
+  
+  .tile-debug-info {
+    display: none;
+  }
+}
+
+/* 印刷用設定 */
+@media print {
+  .tile-canvas-container {
+    break-inside: avoid;
+  }
+  
+  .tile-canvas-container canvas {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+}
