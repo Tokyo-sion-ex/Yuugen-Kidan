@@ -41,8 +41,7 @@
 - レスポンシブデザイン
 
 ## 🚀 開発開始
-
-### 環境設定
+### 💾環境設定
 ```bash
 # 方法1: シェルスクリプト使用
 chmod +x init-project.sh
@@ -53,3 +52,113 @@ npm create vite@latest yugen-kitan -- --template react-ts
 cd yugen-kitan
 npm install
 npm run dev
+```
+## プロジェクト構成
+```bash
+yugen-kitan/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   └── assets/
+│       ├── tiles/              # 牌の画像
+│       ├── sounds/             # 音声ファイル
+│       ├── backgrounds/        # 背景画像
+│       └── fonts/              # フォントファイル
+│
+├── src/
+│   ├── main.tsx               # アプリケーションエントリーポイント
+│   ├── App.tsx                # メインアプリケーション
+│   ├── index.css              # グローバルスタイル
+│   │
+│   ├── components/            # Reactコンポーネント
+│   │   ├── layout/
+│   │   │   ├── Header.tsx     # ヘッダー
+│   │   │   ├── Footer.tsx     # フッター
+│   │   │   └── Sidebar.tsx    # サイドバー
+│   │   │
+│   │   ├── menu/
+│   │   │   ├── MainMenu.tsx   # メインメニュー
+│   │   │   ├── ModeSelector.tsx # 対戦モード選択
+│   │   │   └── Settings.tsx   # 設定画面
+│   │   │
+│   │   ├── game/
+│   │   │   ├── MahjongTable.tsx      # 牌卓全体
+│   │   │   ├── PlayerHand.tsx        # 手牌表示
+│   │   │   ├── Tile.tsx              # 単一の牌
+│   │   │   ├── DiscardPile.tsx       # 捨て牌
+│   │   │   ├── WallDisplay.tsx       # 牌山表示
+│   │   │   ├── PlayerInfo.tsx        # プレイヤー情報
+│   │   │   ├── ScoreBoard.tsx        # 点数板
+│   │   │   └── ActionButtons.tsx     # 操作ボタン
+│   │   │
+│   │   ├── ui/
+│   │   │   ├── Button.tsx            # 汎用ボタン
+│   │   │   ├── Modal.tsx             # モーダルウィンドウ
+│   │   │   └── Tooltip.tsx           # ツールチップ
+│   │   │
+│   │   └── effects/
+│   │       ├── SeasonalEffects.tsx   # 季節エフェクト
+│   │       ├── RippleEffect.tsx      # 波紋エフェクト
+│   │       └── GlowEffect.tsx        # 発光エフェクト
+│   │
+│   ├── core/                  # ゲームロジック
+│   │   ├── game/
+│   │   │   ├── GameEngine.ts         # ゲームエンジン
+│   │   │   ├── GameFlowManager.ts    # ゲーム進行管理
+│   │   │   ├── GameSettings.ts       # ゲーム設定
+│   │   │   └── GameState.ts          # ゲーム状態
+│   │   │
+│   │   ├── rules/
+│   │   │   ├── HandCalculator.ts     # 手役計算
+│   │   │   ├── PointCalculator.ts    # 点数計算
+│   │   │   ├── WinValidator.ts       # 和了判定
+│   │   │   └── RuleSet.ts            # ルールセット
+│   │   │
+│   │   ├── tiles/
+│   │   │   ├── TileManager.ts        # 牌管理
+│   │   │   ├── TileSet.ts            # 牌セット定義
+│   │   │   └── TileGenerator.ts      # 牌生成
+│   │   │
+│   │   └── players/
+│   │       ├── Player.ts             # プレイヤークラス
+│   │       ├── AIPlayer.ts           # AIプレイヤー
+│   │       └── PlayerManager.ts      # プレイヤー管理
+│   │
+│   ├── store/                 # 状態管理
+│   │   ├── gameStore.ts              # ゲーム状態ストア
+│   │   ├── playerStore.ts            # プレイヤーストア
+│   │   └── uiStore.ts                # UI状態ストア
+│   │
+│   ├── utils/                 # ユーティリティ
+│   │   ├── constants.ts              # 定数定義
+│   │   ├── helpers.ts                # ヘルパー関数
+│   │   └── animations.ts             # アニメーション関数
+│   │
+│   ├── hooks/                 # カスタムフック
+│   │   ├── useGameLoop.ts            # ゲームループ
+│   │   ├── useTileDrag.ts            # 牌ドラッグ処理
+│   │   └── useMahjongSounds.ts       # 音声制御
+│   │
+│   ├── styles/               # スタイルファイル
+│   │   ├── variables.css             # CSS変数
+│   │   ├── components.css            # コンポーネントスタイル
+│   │   ├── animations.css            # アニメーション
+│   │   └── responsive.css            # レスポンシブデザイン
+│   │
+│   ├── types/                # TypeScript型定義
+│   │   ├── game.types.ts            # ゲーム関連の型
+│   │   ├── tile.types.ts            # 牌関連の型
+│   │   └── player.types.ts          # プレイヤー関連の型
+│   │
+│   └── assets/               # プロジェクト内アセット
+│       └── data/
+│           └── yaku-list.json       # 役一覧データ
+│
+├── package.json
+├── tsconfig.json
+├── vite.config.ts           # ビルド設定（Viteの場合）
+└── README.md
+```
+
+## その他
+万一、システムに不具合があった場合はIssuesのコーナーまでご連絡ください。
