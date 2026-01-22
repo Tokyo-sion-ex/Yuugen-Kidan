@@ -1,0 +1,155 @@
+.main-menu {
+  width: 100%;
+  max-width: 800px;
+  padding: 40px;
+  text-align: center;
+  background: rgba(10, 25, 47, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.title-section {
+  margin-bottom: 60px;
+}
+
+.game-title {
+  font-family: 'Shippori Mincho', serif;
+  font-size: 4rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, var(--yugen-sakura), var(--yugen-gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 30px rgba(244, 114, 182, 0.3);
+}
+
+.title-sub {
+  display: block;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--yugen-ghost);
+  margin-top: 5px;
+  letter-spacing: 4px;
+}
+
+.game-tagline {
+  font-size: 1.1rem;
+  color: var(--yugen-moonlight);
+  opacity: 0.8;
+  margin-top: 20px;
+  font-weight: 300;
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 50px;
+}
+
+.menu-button {
+  position: relative;
+  width: 300px;
+  padding: 20px 30px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, 
+    rgba(76, 29, 149, 0.3) 0%,
+    rgba(26, 54, 93, 0.3) 100%);
+  border: 2px solid rgba(212, 175, 55, 0.2);
+  border-radius: 15px;
+  color: var(--yugen-moonlight);
+  font-size: 1.4rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.menu-button:hover {
+  border-color: var(--yugen-gold);
+  background: linear-gradient(135deg, 
+    rgba(76, 29, 149, 0.5) 0%,
+    rgba(26, 54, 93, 0.5) 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 10px 20px rgba(212, 175, 55, 0.2),
+    0 0 30px rgba(244, 114, 182, 0.1);
+}
+
+.menu-button.hovered {
+  color: var(--yugen-gold);
+}
+
+.menu-icon {
+  font-size: 1.8rem;
+  transition: transform 0.3s ease;
+}
+
+.menu-button:hover .menu-icon {
+  transform: scale(1.2) rotate(10deg);
+}
+
+.menu-label {
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+.menu-hover-effect {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(212, 175, 55, 0.1), 
+    transparent);
+  transition: left 0.5s ease;
+}
+
+.menu-button:hover .menu-hover-effect {
+  left: 100%;
+}
+
+.menu-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+.version-info {
+  font-size: 0.9rem;
+  color: var(--yugen-ghost);
+  margin-bottom: 5px;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .main-menu {
+    padding: 20px;
+    margin: 10px;
+  }
+  
+  .game-title {
+    font-size: 2.5rem;
+  }
+  
+  .menu-button {
+    width: 100%;
+    max-width: 300px;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+  }
+}
