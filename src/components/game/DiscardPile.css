@@ -1,0 +1,136 @@
+.discard-pile {
+  min-width: 200px;
+  min-height: 100px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  backdrop-filter: blur(2px);
+}
+
+.discard-pile.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-placeholder {
+  color: var(--yugen-ghost);
+  opacity: 0.5;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* 位置によるスタイル調整 */
+.discard-north {
+  transform: rotate(180deg);
+}
+
+.discard-north .discard-grid {
+  transform: rotate(180deg);
+}
+
+.discard-east {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.discard-west {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* 捨て牌グリッド */
+.discard-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.discard-row {
+  display: flex;
+  gap: 3px;
+  justify-content: flex-start;
+}
+
+.discard-tile-wrapper {
+  position: relative;
+}
+
+.discard-tile-wrapper .tile {
+  --tile-width: 35px;
+  --tile-height: 49px;
+}
+
+.discard-tile-wrapper .tile .tile-unicode {
+  font-size: 1rem;
+}
+
+.discard-tile-wrapper .tile .tile-text {
+  font-size: 0.6rem;
+}
+
+/* 最新の捨て牌インジケーター */
+.latest-indicator {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  z-index: 5;
+}
+
+.indicator-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--yugen-spirit);
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--yugen-spirit);
+  animation: pulse-spirit 1.5s infinite;
+}
+
+@keyframes pulse-spirit {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* 捨て牌カウント */
+.discard-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  color: var(--yugen-ghost);
+  font-size: 0.8rem;
+}
+
+.count-number {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--yugen-gold);
+}
+
+.count-label {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .discard-pile {
+    min-width: 150px;
+    min-height: 80px;
+    padding: 8px;
+  }
+  
+  .discard-tile-wrapper .tile {
+    --tile-width: 25px;
+    --tile-height: 35px;
+  }
+  
+  .discard-tile-wrapper .tile .tile-unicode {
+    font-size: 0.8rem;
+  }
+  
+  .discard-tile-wrapper .tile .tile-text {
+    font-size: 0.5rem;
+  }
+}
