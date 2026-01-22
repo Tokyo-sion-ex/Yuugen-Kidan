@@ -1,0 +1,131 @@
+.player-hand {
+  width: 100%;
+  min-height: 140px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.player-hand.active-turn {
+  border-color: var(--yugen-gold);
+  box-shadow: 
+    0 0 30px rgba(212, 175, 55, 0.3),
+    inset 0 0 20px rgba(212, 175, 55, 0.1);
+}
+
+.hand-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  min-height: 80px;
+  margin-bottom: 15px;
+}
+
+.hand-tile-wrapper {
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.hand-tile-wrapper:hover {
+  z-index: 10;
+}
+
+.tile-index {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: var(--yugen-gold);
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 10px;
+  z-index: 5;
+  opacity: 0.7;
+}
+
+/* ターンインジケーター */
+.turn-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  height: 30px;
+}
+
+.my-turn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 15px;
+  background: linear-gradient(135deg, 
+    rgba(212, 175, 55, 0.2), 
+    rgba(244, 114, 182, 0.1));
+  border-radius: 15px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.indicator-dot {
+  width: 12px;
+  height: 12px;
+  background: var(--yugen-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--yugen-gold);
+}
+
+.indicator-text {
+  color: var(--yugen-gold);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.waiting-turn .indicator-text {
+  color: var(--yugen-ghost);
+  font-style: italic;
+}
+
+/* 手牌情報 */
+.hand-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  color: var(--yugen-ghost);
+  font-size: 0.9rem;
+}
+
+.selected-info {
+  color: var(--yugen-spirit);
+  font-weight: 500;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .player-hand {
+    padding: 15px 10px;
+    min-height: 120px;
+  }
+  
+  .hand-container {
+    gap: 5px;
+  }
+  
+  .turn-indicator {
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .indicator-text {
+    font-size: 0.8rem;
+  }
+}
