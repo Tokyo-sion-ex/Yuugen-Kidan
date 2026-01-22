@@ -1,107 +1,120 @@
-import React, { useState, useEffect } from 'react';
-import MainMenu from './components/menu/MainMenu';
-import ModeSelector from './components/menu/ModeSelector';
-import MahjongTable from './components/game/MahjongTable';
-import LoadingScreen from './components/ui/LoadingScreen';
-import SeasonalEffects from './components/effects/SeasonalEffects';
-import { useMahjongSounds } from './hooks/useMahjongSounds';
-import { GameMode } from './types/game.types';
-import './App.css';
+import React, { useState } from 'react';
+import { MainMenu } from '@/components/menu/MainMenu';
+import { AvatarCustomizer } from '@/components/avatar/AvatarCustomizer';
+import { LeagueLadder } from '@/components/league/LeagueLadder';
+import { Leaderboard } from '@/components/league/Leaderboard';
+import { TournamentLobby } from '@/components/tournament/TournamentLobby';
+import { BracketView } from '@/components/tournament/BracketView';
+import { SpectateLobby } from '@/components/spectate/SpectateLobby';
+import { SpectatorView } from '@/components/spectate/SpectatorView';
+import { MatchmakingLobby } from '@/components/matchmaking/MatchmakingLobby';
+
+type AppView = 
+  | 'main-menu'
+  | 'avatar-customizer'
+  | 'league-ladder'
+  | 'leaderboard'
+  | 'tournament-lobby'
+  | 'bracket-view'
+  | 'spectate-lobby'
+  | 'spectator-view'
+  | 'matchmaking-lobby';
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState<'menu' | 'mode-select' | 'game' | 'loading'>('loading');
-  const [selectedMode, setSelectedMode] = useState<GameMode | null>(null);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [currentView, setCurrentView] = useState<AppView>('main-menu');
+  const [selectedTournamentId, setSelectedTournamentId] = useState<string | null>(null);
+  const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
   
-  // サウンド初期化
-  const { playBGM, stopBGM, changeVolume } = useMahjongSounds();
-
-  // 初期化処理
-  useEffect(() => {
-    const initializeApp = async () => {
-      // アセットのプリロード（擬似的な遅延）
-      await new Promise(resolve => setTimeout(resolve, 1500));
+  const navigateTo = (view: AppView) => {
+    setCurrentView(view);
+  };
+  
+  const renderCurrentView = () => {
+    switch (currentView) {
+      case 'main-menu':
+        return (
+          <MainMenu
+            onAvatarCustomize={() => navigateTo('avatar-customizer')}
+            onLeagueView={() => navigateTo('league-ladder')}
+            onTournamentView={() => navigateTo('tournament-lobby')}
+            onSpectateView={() => navigateTo('spectate-lobby')}
+            onMatchmakingView={() => navigateTo('matchmaking-lobby')}
+          />
+        );
       
-      // サウンド初期化
-      changeVolume(0.5);
-      playBGM('menu');
+      case 'avatar-customizer':
+        return <AvatarCustomizer onBack={() => navigateTo('main-menu')} />;
       
-      setIsInitialized(true);
-      setCurrentScreen('menu');
-    };
-
-    initializeApp();
-
-    // クリーンアップ
-    return () => {
-      stopBGM();
-    };
-  }, []);
-
-  // 画面遷移ハンドラー
-  const handleModeSelect = () => {
-    playSound('click');
-    setCurrentScreen('mode-select');
+      case 'league-ladder':
+        return (
+          <>
+            <LeagueLadder />
+            <Leaderboard />
+            <button onClick={() => navigateTo('main-menu')}>戻る</button>
+          </>
+        );
+      
+      case 'tournament-lobby':
+        return selectedTournamentId ? (
+          <BracketView 
+            tournamentId={selectedTournamentId} 
+            onBack={() => setSelectedTournamentId(null)}
+          />
+        ) : (
+          <TournamentLobby 
+            onSelectTournament={(id) => {
+              setSelectedTournamentId(id);
+              navigateTo('bracket-view');
+            }}
+            onBack={() => navigateTo('main-menu')}
+          />
+        );
+      
+      case 'spectate-lobby':
+        return selectedGameId ? (
+          <SpectatorView 
+            gameId={selectedGameId}
+            onExit={() => setSelectedGameId(null)}
+          />
+        ) : (
+          <SpectateLobby 
+            onSelectGame={(id) => {
+              setSelectedGameId(id);
+              navigateTo('spectator-view');
+            }}
+            onBack={() => navigateTo('main-menu')}
+          />
+        );
+      
+      case 'matchmaking-lobby':
+        return <MatchmakingLobby onBack={() => navigateTo('main-menu')} />;
+      
+      default:
+        return <MainMenu />;
+    }
   };
-
-  const handleBackToMenu = () => {
-    playSound('click');
-    setCurrentScreen('menu');
-    playBGM('menu');
-  };
-
-  const handleStartGame = (mode: GameMode) => {
-    playSound('start');
-    setSelectedMode(mode);
-    setCurrentScreen('game');
-    playBGM('game');
-  };
-
-  const handleExitGame = () => {
-    playSound('click');
-    setCurrentScreen('menu');
-    setSelectedMode(null);
-    playBGM('menu');
-  };
-
-  const playSound = (sound: string) => {
-    // シンプルなクリック音（後で実装）
-    console.log(`Play sound: ${sound}`);
-  };
-
-  if (!isInitialized || currentScreen === 'loading') {
-    return <LoadingScreen />;
-  }
-
+  
   return (
-    <div className="yugen-app">
-      {/* 季節エフェクトの背景 */}
-      <SeasonalEffects />
+    <div className="app">
+      <header className="app-header">
+        <h1>幽玄奇談</h1>
+        {currentView !== 'main-menu' && (
+          <button 
+            onClick={() => navigateTo('main-menu')}
+            className="back-button"
+          >
+            ← メインメニューに戻る
+          </button>
+        )}
+      </header>
       
-      {/* メインコンテンツ */}
-      <div className="app-content">
-        {currentScreen === 'menu' && (
-          <MainMenu 
-            onModeSelect={handleModeSelect}
-            onSettings={() => console.log('Open settings')}
-            onQuit={() => window.close()}
-          />
-        )}
-        
-        {currentScreen === 'mode-select' && (
-          <ModeSelector 
-            onSelectMode={handleStartGame}
-            onBack={handleBackToMenu}
-          />
-        )}
-        
-        {currentScreen === 'game' && selectedMode && (
-          <MahjongTable 
-            gameMode={selectedMode}
-            onExit={handleExitGame}
-          />
-        )}
-      </div>
+      <main className="app-main">
+        {renderCurrentView()}
+      </main>
+      
+      <footer className="app-footer">
+        <p>© 2025 幽玄奇談 - 幽玄・幻想・和風モダン麻雀</p>
+      </footer>
     </div>
   );
 }
