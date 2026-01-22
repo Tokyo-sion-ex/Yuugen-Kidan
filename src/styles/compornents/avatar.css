@@ -1,0 +1,124 @@
+.avatar-customizer {
+  background: rgba(20, 20, 40, 0.9);
+  border-radius: 12px;
+  padding: 24px;
+  border: 1px solid rgba(100, 100, 255, 0.2);
+}
+
+.customizer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(100, 100, 255, 0.1);
+}
+
+.customizer-container {
+  display: flex;
+  gap: 32px;
+  min-height: 500px;
+}
+
+.avatar-preview-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.avatar-preview {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.avatar-preview.editing {
+  border: 3px solid rgba(100, 100, 255, 0.5);
+}
+
+.avatar-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.avatar-part {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.parts-selector-section {
+  flex: 2;
+  background: rgba(30, 30, 60, 0.5);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.part-type-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.type-tab {
+  padding: 8px 16px;
+  background: rgba(50, 50, 80, 0.5);
+  border: none;
+  border-radius: 6px;
+  color: #aaa;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.type-tab.active {
+  background: rgba(100, 100, 255, 0.3);
+  color: #fff;
+}
+
+.color-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.color-picker label {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.color-picker input[type="color"] {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.preset-colors {
+  display: flex;
+  gap: 8px;
+}
+
+.color-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.color-swatch:hover {
+  transform: scale(1.1);
+}
