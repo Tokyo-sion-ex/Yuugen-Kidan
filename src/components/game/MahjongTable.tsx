@@ -327,3 +327,104 @@ const MahjongTable: React.FC<MahjongTableProps> = ({ gameMode, onExit }) => {
 };
 
 export default MahjongTable;
+
+import React, { useState } from 'react';
+import { RealTimeAnalyzer } from '../analytics/RealTimeAnalyzer';
+import { AdvancedGameRecorder } from '../../core/analytics/AdvancedGameRecorder';
+
+export const MahjongTable: React.FC = () => {
+  const [showAnalysis, setShowAnalysis] = useState(false);
+  const [analysisMode, setAnalysisMode] = useState<'learning' | 'normal'>('normal');
+  const [currentEfficiencies, setCurrentEfficiencies] = useState<TileEfficiency[]>([]);
+  const [currentSuggestions, setCurrentSuggestions] = useState<SuggestedAction[]>([]);
+  
+  // ゲームレコーダーのインスタンス
+  const gameRecorderRef = useRef<AdvancedGameRecorder | null>(null);
+  
+  // 牌を切る時の処理（拡張）
+  const handleDiscard = (tile: TileType) => {
+    // 元のゲームロジック
+    gameEngine.discardTile(currentPlayerId, tile);
+    
+    // 分析データを取得
+    if (gameRecorderRef.current && analysisMode === 'learning') {
+      const lastAction = gameRecorderRef.current.getLastAction();
+      if (lastAction?.handEfficiency) {
+        setCurrentEfficiencies(lastAction.handEfficiency);
+      }
+      if (lastAction?.suggestedActions) {
+        setCurrentSuggestions(lastAction.suggestedActions);
+      }
+    }
+  };
+  
+  return (
+    <div className="mahjong-table">
+      {/* 既存の牌卓UI */}
+      <div className="table-main">
+        {/* ... 既存の牌卓コンポーネント ... */}
+      </div>
+      
+      {/* 分析UI（トグル表示） */}
+      <div className={`analysis-sidebar ${showAnalysis ? 'visible' : 'hidden'}`}>
+        <div className="analysis-header">
+          <h3>🧠 牌眼（ハイガン）システム</h3>
+          <button onClick={() => setShowAnalysis(false)}>✕</button>
+        </div>
+        
+        <div className="analysis-mode-selector">
+          <label>
+            <input
+              type="radio"
+              name="analysisMode"
+              value="normal"
+              checked={analysisMode === 'normal'}
+              onChange={() => setAnalysisMode('normal')}
+            />
+            通常モード
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="analysisMode"
+              value="learning"
+              checked={analysisMode === 'learning'}
+              onChange={() => setAnalysisMode('learning')}
+            />
+            学習モード（AI分析有効）
+          </label>
+        </div>
+        
+        {analysisMode === 'learning' && (
+          <RealTimeAnalyzer
+            currentHand={currentPlayerHand}
+            efficiencies={currentEfficiencies}
+            suggestions={currentSuggestions}
+            onTileSelect={(tile) => {
+              // 牌を選択した時のアクション（例：マーキング）
+              highlightTile(tile);
+            }}
+          />
+        )}
+        
+        {/* クイック分析ボタン */}
+        <div className="quick-analysis">
+          <button onClick={() => analyzeCurrentSituation()}>
+            🔍 現在の局面を分析
+          </button>
+          <button onClick={() => showMissedOpportunities()}>
+            💡 見逃したチャンスを表示
+          </button>
+        </div>
+      </div>
+      
+      {/* 分析サイドバートグルボタン */}
+      <button 
+        className="analysis-toggle-button"
+        onClick={() => setShowAnalysis(!showAnalysis)}
+      >
+        {showAnalysis ? '🧠 分析を隠す' : '🧠 分析を表示'}
+      </button>
+    </div>
+  );
+};
