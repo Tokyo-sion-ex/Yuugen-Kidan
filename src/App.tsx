@@ -1,119 +1,56 @@
 import React, { useState } from 'react';
-import { MainMenu } from '@/components/menu/MainMenu';
-import { AvatarCustomizer } from '@/components/avatar/AvatarCustomizer';
-import { LeagueLadder } from '@/components/league/LeagueLadder';
-import { Leaderboard } from '@/components/league/Leaderboard';
-import { TournamentLobby } from '@/components/tournament/TournamentLobby';
-import { BracketView } from '@/components/tournament/BracketView';
-import { SpectateLobby } from '@/components/spectate/SpectateLobby';
-import { SpectatorView } from '@/components/spectate/SpectatorView';
-import { MatchmakingLobby } from '@/components/matchmaking/MatchmakingLobby';
-
-type AppView = 
-  | 'main-menu'
-  | 'avatar-customizer'
-  | 'league-ladder'
-  | 'leaderboard'
-  | 'tournament-lobby'
-  | 'bracket-view'
-  | 'spectate-lobby'
-  | 'spectator-view'
-  | 'matchmaking-lobby';
+import './App.css';
+import { MahjongTable } from './components/game/MahjongTable';
+import { CreativeWorkshop } from './components/creative/CreativeWorkshop';
+import { ReplayTheater } from './components/creative/ReplayTheater/ReplayTheater';
+import { AcademyDojo } from './components/academy/Dojo/AcademyDojo';
 
 function App() {
-  const [currentView, setCurrentView] = useState<AppView>('main-menu');
-  const [selectedTournamentId, setSelectedTournamentId] = useState<string | null>(null);
-  const [selectedGameId, setSelectedGameId] = useState<string | null>(null);
-  
-  const navigateTo = (view: AppView) => {
-    setCurrentView(view);
-  };
-  
-  const renderCurrentView = () => {
-    switch (currentView) {
-      case 'main-menu':
-        return (
-          <MainMenu
-            onAvatarCustomize={() => navigateTo('avatar-customizer')}
-            onLeagueView={() => navigateTo('league-ladder')}
-            onTournamentView={() => navigateTo('tournament-lobby')}
-            onSpectateView={() => navigateTo('spectate-lobby')}
-            onMatchmakingView={() => navigateTo('matchmaking-lobby')}
-          />
-        );
-      
-      case 'avatar-customizer':
-        return <AvatarCustomizer onBack={() => navigateTo('main-menu')} />;
-      
-      case 'league-ladder':
-        return (
-          <>
-            <LeagueLadder />
-            <Leaderboard />
-            <button onClick={() => navigateTo('main-menu')}>戻る</button>
-          </>
-        );
-      
-      case 'tournament-lobby':
-        return selectedTournamentId ? (
-          <BracketView 
-            tournamentId={selectedTournamentId} 
-            onBack={() => setSelectedTournamentId(null)}
-          />
-        ) : (
-          <TournamentLobby 
-            onSelectTournament={(id) => {
-              setSelectedTournamentId(id);
-              navigateTo('bracket-view');
-            }}
-            onBack={() => navigateTo('main-menu')}
-          />
-        );
-      
-      case 'spectate-lobby':
-        return selectedGameId ? (
-          <SpectatorView 
-            gameId={selectedGameId}
-            onExit={() => setSelectedGameId(null)}
-          />
-        ) : (
-          <SpectateLobby 
-            onSelectGame={(id) => {
-              setSelectedGameId(id);
-              navigateTo('spectator-view');
-            }}
-            onBack={() => navigateTo('main-menu')}
-          />
-        );
-      
-      case 'matchmaking-lobby':
-        return <MatchmakingLobby onBack={() => navigateTo('main-menu')} />;
-      
-      default:
-        return <MainMenu />;
-    }
-  };
+  const [activeTab, setActiveTab] = useState<'game' | 'creative' | 'replay' | 'academy'>('game');
   
   return (
     <div className="app">
       <header className="app-header">
-        <h1>幽玄奇談</h1>
-        {currentView !== 'main-menu' && (
-          <button 
-            onClick={() => navigateTo('main-menu')}
-            className="back-button"
-          >
-            ← メインメニューに戻る
-          </button>
-        )}
+        <h1>🀄 幽玄奇談 - 拡張版</h1>
+        <p>幻想和風麻雀ゲーム</p>
       </header>
       
+      <nav className="app-nav">
+        <button 
+          className={`nav-button ${activeTab === 'game' ? 'active' : ''}`}
+          onClick={() => setActiveTab('game')}
+        >
+          🎮 対戦
+        </button>
+        <button 
+          className={`nav-button ${activeTab === 'creative' ? 'active' : ''}`}
+          onClick={() => setActiveTab('creative')}
+        >
+          🎨 工房
+        </button>
+        <button 
+          className={`nav-button ${activeTab === 'replay' ? 'active' : ''}`}
+          onClick={() => setActiveTab('replay')}
+        >
+          🎬 リプレイ
+        </button>
+        <button 
+          className={`nav-button ${activeTab === 'academy' ? 'active' : ''}`}
+          onClick={() => setActiveTab('academy')}
+        >
+          🏫 道場
+        </button>
+      </nav>
+      
       <main className="app-main">
-        {renderCurrentView()}
+        {activeTab === 'game' && <MahjongTable />}
+        {activeTab === 'creative' && <CreativeWorkshop />}
+        {activeTab === 'replay' && <ReplayTheater />}
+        {activeTab === 'academy' && <AcademyDojo />}
       </main>
       
       <footer className="app-footer">
-        <p>© 2025 幽玄奇談 - 幽玄・幻想・和風モダン麻雀</p>
+        <p>提供: 幽玄奇談開発グループ | 抹茶缶 | 抹茶缶Code</p>
       </footer>
     </div>
   );
