@@ -1,36 +1,398 @@
-.yugen-app {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.app-content {
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  color: #e8eaf6;
+  min-height: 100vh;
+}
+
+.app {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
 }
 
-/* 背景エフェクト用 */
-.app-background {
-  position: absolute;
-  top: 0;
-  left: 0;
+.app-header {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(101, 87, 245, 0.3);
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, #fff, #c5cae9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.app-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.nav-button {
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #c5cae9;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.nav-button.active {
+  background: linear-gradient(135deg, #6557f5, #9c27b0);
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 15px rgba(101, 87, 245, 0.3);
+}
+
+.app-main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
   width: 100%;
-  height: 100%;
-  z-index: 1;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #9fa8da;
+}
+
+/* 麻雀卓のスタイル */
+.mahjong-table {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid rgba(101, 87, 245, 0.2);
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.game-info {
+  display: flex;
+  gap: 1.5rem;
+  color: #9fa8da;
+}
+
+.table-container {
+  display: grid;
+  grid-template-areas:
+    "north north north"
+    "west center east"
+    "player player player";
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.opponent-area {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.opponent-area.north {
+  grid-area: north;
+}
+
+.opponent-area.west {
+  grid-area: west;
+}
+
+.opponent-area.east {
+  grid-area: east;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.score {
+  font-weight: bold;
+  color: #4caf50;
+}
+
+.hand-preview {
+  display: flex;
+  gap: 0.25rem;
+  margin-top: 1rem;
+}
+
+.hidden-tile {
+  width: 30px;
+  height: 45px;
+  background: linear-gradient(135deg, #5d4037, #3e2723);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.center-area {
+  grid-area: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.wall-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.wall-tile {
+  width: 80px;
+  height: 30px;
+  background: linear-gradient(135deg, #795548, #5d4037);
+  border-radius: 6px;
+}
+
+.wall-count {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.dora-display {
+  text-align: center;
+}
+
+.dora-display h4 {
+  margin-bottom: 0.5rem;
+  color: #ffd600;
+}
+
+.dora-tiles {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.player-area {
+  grid-area: player;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(101, 87, 245, 0.3);
+}
+
+.discard-pile {
+  margin-bottom: 1.5rem;
+}
+
+.discard-pile h4 {
+  margin-bottom: 0.5rem;
+  color: #9fa8da;
+}
+
+.discard-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  min-height: 60px;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+
+.player-hand h4 {
+  margin-bottom: 1rem;
+  color: #c5cae9;
+}
+
+.hand-tiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tile-wrapper {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.tile-wrapper:hover {
+  transform: translateY(-5px);
+}
+
+.tile-wrapper.selected {
+  transform: translateY(-10px);
+  filter: drop-shadow(0 5px 15px rgba(255, 215, 0, 0.5));
+}
+
+.player-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.control-button {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #6557f5, #9c27b0);
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.control-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(101, 87, 245, 0.4);
+}
+
+.score-board {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.score-board h3 {
+  margin-bottom: 1rem;
+  color: #c5cae9;
+  text-align: center;
+}
+
+.score-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.score-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+}
+
+.player-name {
+  font-size: 0.9rem;
+  color: #9fa8da;
+  margin-bottom: 0.5rem;
+}
+
+.player-score {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+/* 牌のスタイル */
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  user-select: none;
+}
+
+.tile-border {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
   pointer-events: none;
 }
 
-/* レスポンシブ調整 */
+.tile-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.tile-label {
+  color: white;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.tile-small {
+  width: 40px;
+  height: 60px;
+  font-size: 14px;
+}
+
+.tile-medium {
+  width: 50px;
+  height: 75px;
+  font-size: 18px;
+}
+
+.tile-large {
+  width: 60px;
+  height: 90px;
+  font-size: 22px;
+}
+
+/* レスポンシブ */
 @media (max-width: 768px) {
-  .app-content {
-    padding: 10px;
+  .table-container {
+    grid-template-areas:
+      "north"
+      "center"
+      "player"
+      "west"
+      "east";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  
+  .score-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .nav-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
   }
 }
